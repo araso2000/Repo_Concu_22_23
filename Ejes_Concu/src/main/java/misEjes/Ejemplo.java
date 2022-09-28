@@ -1,4 +1,4 @@
-package ejercicios;
+package misEjes;
 
 import static es.urjc.etsii.code.concurrency.SimpleConcurrent.*;
 
