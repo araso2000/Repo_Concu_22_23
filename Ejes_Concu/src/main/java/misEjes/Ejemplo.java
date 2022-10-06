@@ -5,13 +5,19 @@ import static es.urjc.etsii.code.concurrency.SimpleConcurrent.*;
 public class Ejemplo {
 
 	public static void repeat(String text) {
-		for(int i=0; i<5; i++){println(text);}
+		enterMutex();
+		for(int i=0; i<5; i++){
+			println(text);
+		}
+		exitMutex();
 	}
 		
 	public static void printText() {
-		println("B1");
-		println("B2");
-		println("B3");
+		enterMutex();
+		printlnI("B1");
+		printlnI("B2");
+		printlnI("B3");
+		exitMutex();
 	}
 		
 	public static void main(String[] args) {
