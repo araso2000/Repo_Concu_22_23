@@ -1,4 +1,10 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
 <qualifiedTypeNameHistroy>
     <fullyQualifiedTypeName name="es.urjc.etsii.code.concurrency.SimpleSemaphore"/>
+    <fullyQualifiedTypeName name="se.michaelthelin.spotify.SpotifyApi.Builder"/>
+    <fullyQualifiedTypeName name="se.michaelthelin.spotify.requests.authorization.client_credentials.ClientCredentialsRequest"/>
+    <fullyQualifiedTypeName name="se.michaelthelin.spotify.model_objects.credentials.ClientCredentials"/>
+    <fullyQualifiedTypeName name="java.io.IOException"/>
+    <fullyQualifiedTypeName name="se.michaelthelin.spotify.exceptions.SpotifyWebApiException"/>
+    <fullyQualifiedTypeName name="java.text.ParseException"/>
 </qualifiedTypeNameHistroy>
