@@ -626,3 +626,25 @@
 2022-10-09 16:36:06,358 [Worker-24: Launching Tema2_Eje13B] INFO  o.e.m.c.i.embedder.EclipseLogger - Copying 0 resource
 2022-10-09 16:36:06,364 [Worker-24: Launching Tema2_Eje13B] INFO  o.e.m.c.i.embedder.EclipseLogger - Using 'UTF-8' encoding to copy filtered resources.
 2022-10-09 16:36:06,365 [Worker-24: Launching Tema2_Eje13B] INFO  o.e.m.c.i.embedder.EclipseLogger - Copying 0 resource
+2022-10-14 13:13:56,805 [Worker-4: Loading available Gradle versions] INFO  o.e.b.c.i.u.g.PublishedGradleVersions - Gradle version information cache is out-of-date. Trying to update.
+2022-10-14 13:13:59,839 [Worker-0: Decoration Calculation] WARN  org.eclipse.jgit.util.FS - Cannot run program "\usr\bin\git" (in directory "\usr\bin"): CreateProcess error=2, El sistema no puede encontrar el archivo especificado
+2022-10-14 13:42:20,457 [Worker-22: Launching Tema2_Eje13B] INFO  o.e.m.c.i.embedder.EclipseLogger - Using 'UTF-8' encoding to copy filtered resources.
+2022-10-14 13:42:20,463 [Worker-22: Launching Tema2_Eje13B] INFO  o.e.m.c.i.embedder.EclipseLogger - Copying 0 resource
+2022-10-14 13:42:20,470 [Worker-22: Launching Tema2_Eje13B] INFO  o.e.m.c.i.embedder.EclipseLogger - Using 'UTF-8' encoding to copy filtered resources.
+2022-10-14 13:42:20,470 [Worker-22: Launching Tema2_Eje13B] INFO  o.e.m.c.i.embedder.EclipseLogger - Copying 0 resource
+2022-10-14 13:43:58,854 [Worker-14: Launching Tema2_Eje13B] INFO  o.e.m.c.i.embedder.EclipseLogger - Using 'UTF-8' encoding to copy filtered resources.
+2022-10-14 13:43:58,861 [Worker-14: Launching Tema2_Eje13B] INFO  o.e.m.c.i.embedder.EclipseLogger - Copying 0 resource
+2022-10-14 13:43:58,865 [Worker-14: Launching Tema2_Eje13B] INFO  o.e.m.c.i.embedder.EclipseLogger - Using 'UTF-8' encoding to copy filtered resources.
+2022-10-14 13:43:58,866 [Worker-14: Launching Tema2_Eje13B] INFO  o.e.m.c.i.embedder.EclipseLogger - Copying 0 resource
+2022-10-14 13:53:03,848 [Worker-22: Building] INFO  o.e.m.c.i.embedder.EclipseLogger - Using 'UTF-8' encoding to copy filtered resources.
+2022-10-14 13:53:03,849 [Worker-22: Building] INFO  o.e.m.c.i.embedder.EclipseLogger - Copying 0 resource
+2022-10-14 13:53:03,852 [Worker-22: Building] INFO  o.e.m.c.i.embedder.EclipseLogger - Using 'UTF-8' encoding to copy filtered resources.
+2022-10-14 13:53:03,853 [Worker-22: Building] INFO  o.e.m.c.i.embedder.EclipseLogger - Copying 0 resource
+2022-10-14 13:54:08,102 [Worker-31: Building] INFO  o.e.m.c.i.embedder.EclipseLogger - Using 'UTF-8' encoding to copy filtered resources.
+2022-10-14 13:54:08,102 [Worker-31: Building] INFO  o.e.m.c.i.embedder.EclipseLogger - Copying 0 resource
+2022-10-14 13:54:08,105 [Worker-31: Building] INFO  o.e.m.c.i.embedder.EclipseLogger - Using 'UTF-8' encoding to copy filtered resources.
+2022-10-14 13:54:08,106 [Worker-31: Building] INFO  o.e.m.c.i.embedder.EclipseLogger - Copying 0 resource
+2022-10-14 13:56:10,519 [Worker-27: Building] INFO  o.e.m.c.i.embedder.EclipseLogger - Using 'UTF-8' encoding to copy filtered resources.
+2022-10-14 13:56:10,520 [Worker-27: Building] INFO  o.e.m.c.i.embedder.EclipseLogger - Copying 0 resource
+2022-10-14 13:56:10,524 [Worker-27: Building] INFO  o.e.m.c.i.embedder.EclipseLogger - Using 'UTF-8' encoding to copy filtered resources.
+2022-10-14 13:56:10,524 [Worker-27: Building] INFO  o.e.m.c.i.embedder.EclipseLogger - Copying 0 resource

@@ -6,8 +6,8 @@ import es.urjc.etsii.code.concurrency.SimpleSemaphore;
 
 public class Tema2_Eje13B {
 	
-	private static final int NUM_TRENES = 10;
-	private static final int NUM_TRAMOS = 2;
+	private static final int NUM_TRENES = 5;
+	private static final int NUM_TRAMOS = 3;
 	
 	private static SimpleSemaphore[] sema;
 	
@@ -16,17 +16,16 @@ public class Tema2_Eje13B {
 			sema[ii].acquire();
 			sleepRandom(500);
 			recorrerTramo(ii,numTren);
-			/*if(ii!=(NUM_TRAMOS-1)) {
-				sema[ii++].acquire();
-			}*/
-			sema[ii].release();
+			if(ii!=0) {
+				sema[ii-1].release();
+			}
 		}
 	}
 	
 	private static void recorrerTramo(int numTramo,int numTren) {
-		println("ENTRA el TREN " + numTren + " en el TRAMO " + numTramo); 
+		printlnI("ENTRA el TREN " + numTren + " en el TRAMO " + numTramo); 
 		sleepRandom(500);
-		println("SALE  el TREN " + numTren + " del   TRAMO " + numTramo);
+		printlnI("SALE  el TREN " + numTren + " del   TRAMO " + numTramo);
 	}
 
 	public static void main(String[] args) {
