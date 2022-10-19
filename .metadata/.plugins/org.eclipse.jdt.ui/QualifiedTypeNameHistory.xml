@@ -7,4 +7,6 @@
     <fullyQualifiedTypeName name="java.io.IOException"/>
     <fullyQualifiedTypeName name="se.michaelthelin.spotify.exceptions.SpotifyWebApiException"/>
     <fullyQualifiedTypeName name="java.text.ParseException"/>
+    <fullyQualifiedTypeName name="java.util.ArrayList"/>
+    <fullyQualifiedTypeName name="es.urjc.etsii.code.concurrency.SimpleConcurrent"/>
 </qualifiedTypeNameHistroy>

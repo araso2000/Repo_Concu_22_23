@@ -1,4 +1,5 @@
 package ejesResueltosGrimaldo;
+
 import static es.urjc.etsii.code.concurrency.SimpleConcurrent.*;
 import java.util.Random;
 
