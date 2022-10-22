@@ -1,10 +1,9 @@
-package misEjes;
+package estudiar;
 
 import static es.urjc.etsii.code.concurrency.SimpleConcurrent.*;
-
 import es.urjc.etsii.code.concurrency.SimpleSemaphore;
 
-public class Tema2_Eje13B {
+public class Eje13B {
 	
 	private static final int NUM_TRENES = 5;
 	private static final int NUM_TRAMOS = 5;
@@ -44,4 +43,5 @@ public class Tema2_Eje13B {
 		}
 		startThreadsAndWait();
 	}
+
 }
