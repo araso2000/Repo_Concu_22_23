@@ -5,7 +5,6 @@ import es.urjc.etsii.code.concurrency.SimpleSemaphore;
 
 public class Eje15 {
 	
-	private static final int ITERACIONES = 5;
 	private static final int PROCESOS = 4;
 	private static volatile int numBarrera;
 	
