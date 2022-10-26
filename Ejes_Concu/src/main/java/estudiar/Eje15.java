@@ -22,7 +22,7 @@ public class Eje15 {
 				barrera.acquire();
 				desbloqueo.release();
 			}else {
-				print("-");
+				print("\n");
 				numBarrera = 0;
 				
 				barrera.release(3);
