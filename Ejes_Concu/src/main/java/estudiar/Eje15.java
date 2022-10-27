@@ -25,8 +25,8 @@ public class Eje15 {
 				print("\n");
 				numBarrera = 0;
 				
-				barrera.release(3);
-				desbloqueo.acquire(3);
+				barrera.release(PROCESOS-1);
+				desbloqueo.acquire(PROCESOS-1);
 				aumentar.release();
 			}
 		}

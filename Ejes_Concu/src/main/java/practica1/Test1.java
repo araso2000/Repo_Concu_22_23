@@ -11,7 +11,7 @@ import es.urjc.etsii.code.concurrency.SimpleSemaphore;
 public class Test1 {
 
     public static final int N_THREADS = 5;
-    public static final int DATA_SAMPLE_SIZE = 16;
+    public static final int DATA_SAMPLE_SIZE = 64;
     public static final int TOT_NIVELES = (int) (Math.ceil(log(DATA_SAMPLE_SIZE, 2)));
 
     private static int [] data,resultado;
@@ -100,10 +100,13 @@ public class Test1 {
     public static void main(String[] args) {
     	initDataset();
     	
+    	
     	int sum = 0;
+    	LocalDateTime start = LocalDateTime.now();
         for (int i = 0; i < DATA_SAMPLE_SIZE; i++) {
             sum = add(sum, data[i]);
         }
+        Duration time = Duration.between(start, LocalDateTime.now());
         
     	
     	resultado = new int[DATA_SAMPLE_SIZE / 2];
@@ -121,10 +124,9 @@ public class Test1 {
     	nivel = 1;
 
         createThreads(N_THREADS,"proceso");
-        LocalDateTime start = LocalDateTime.now();
+        start = LocalDateTime.now();
         startThreadsAndWait();
-        Duration time = Duration.between(start, LocalDateTime.now());
-        println("Suma secuencial : " + sum);
+        println("Suma secuencial : " + sum +  " - Tiempo: " + time);
         println("ConcurrentAdder computed sum in " + Duration.between(start, LocalDateTime.now()));  
     }
 }
