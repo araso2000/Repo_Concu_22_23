@@ -156,9 +156,9 @@ public class Practica1 {
     	//Codigo que ejecuta la suma secuencial
     	int sumaSecuencial = 0;
     	LocalDateTime startSecuencial = LocalDateTime.now();
-        for (int i = 0; i < DATA_SAMPLE_SIZE; i++) {
+        /*for (int i = 0; i < DATA_SAMPLE_SIZE; i++) {
         	sumaSecuencial = add(sumaSecuencial, data[i]);
-        }
+        }*/
         Duration time = Duration.between(startSecuencial, LocalDateTime.now());
         
         //Creamos los hilos y ejecutamos el codigo concurrente
