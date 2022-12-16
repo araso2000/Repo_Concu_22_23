@@ -12,7 +12,7 @@ public class Practica1 {
 
 	//Constantes
     public static final int N_THREADS = 5;
-    public static final int DATA_SAMPLE_SIZE = 16;
+    public static final int DATA_SAMPLE_SIZE = 128;
     
     //Constante que automaticamente calcula y guarda el numero de niveles de sumas segun el tamaño del array de entrada
     public static final int TOT_NIVELES = (int) (Math.ceil(log(DATA_SAMPLE_SIZE, 2)));

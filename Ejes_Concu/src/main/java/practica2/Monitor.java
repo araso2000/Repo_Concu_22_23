@@ -16,6 +16,11 @@ public class Monitor {
     }
 
     public void startMonitor() {
+    	new Thread(() -> {
+    		while() {
+    			//Tareas
+    		}
+    	}, "monitorThread");
         //TODO Deberá arrancar un hilo que compruebe e imprima el estado de la instancia de Universtrum
         // y cuantas tareas están pendientes de ejecución.
         // la invocación de este método debe de ser asincrona, el método debe arrancar el hilo de monitorización

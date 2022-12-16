@@ -32,6 +32,12 @@ public class Universtrum {
     // ¿Qué referencias externas necesitamos al crear la tarea?
     // ¿Cómo vamos a gestionar el control del tiempo que lleva la tarea ejecutándose y esperando a ser ejecutada?
 
+    private class ComplexTaskExecutor implements Callable<ComplexTaskResult>{
+    	private final ComplexTask task;
+    	
+    	public co
+    }
+    
     public Universtrum(int concurrencyLevel) {
         this.concurrencyLevel = concurrencyLevel;
         status = Status.READY;
@@ -40,7 +46,8 @@ public class Universtrum {
     // TODO: Crear un un sistema de los hilos que ejecutarán las tareas
 
     //       y una estructura de datos que mantenga las tareas encoladas
-
+    ExecutorService executor;
+    Collection<ComplexTask> queue;
     //TODO Definir un método que permita añadir una ComplexTask al supercomputador.
     //      La llamada a este método debe ser asíncrona, el hilo que llama a este método no debe bloquearse esperando
     //      a que esté el resultado listo, sino que deberá añadir la tarea a la lista de tareas
@@ -50,6 +57,10 @@ public class Universtrum {
 
     //public ??? submit(ComplexTask task)  {}
 
+    public void uploadTask(ComplexTask task) {
+    	Future<ComplexTaskResult> submit = executor.submit(() -> task.solve());
+    }
+    
     public Status getStatus() {
         return status;
     }
