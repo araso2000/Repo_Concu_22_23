@@ -1,4 +1,4 @@
-package ejercicio.ejer_t5_5_3;
+package ejesResueltosGrimaldo_Parte2;
 
 import java.util.concurrent.locks.Lock;
 import java.util.concurrent.locks.ReadWriteLock;
