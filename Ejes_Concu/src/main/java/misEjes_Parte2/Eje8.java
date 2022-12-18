@@ -1,53 +1,54 @@
 package misEjes_Parte2;
 
-import java.util.concurrent.Semaphore;
+import java.util.concurrent.locks.Condition;
+import java.util.concurrent.locks.Lock;
+import java.util.concurrent.locks.ReentrantLock;
 
 public class Eje8 {
 	
-	private static final int PRODUCTORES = 5;
-	private static final int CONSUMIDORES = 3;
+	private int[] array = new int[10];
+	private int nextINPos = 0;
+	private int nextOUTPos = 0;
+	private int posDisponibles = 10;
 	
-	private static final int BUFFER_SIZE = 10;
+	Lock lockCond_1 = new ReentrantLock();
+	Condition cd_1 = lockCond_1.newCondition();
 	
-	private int[] datos = new int[BUFFER_SIZE];
-	private int posInser = 0;
-	private int posSacar = 0;
+	Lock lock1 = new ReentrantLock();
 	
-	private Semaphore nHuecos = new Semaphore(BUFFER_SIZE);
-	private Semaphore nProductos = new Semaphore(0);
-	private Semaphore emPosInser = new Semaphore(1);
-	private Semaphore emPosSacar = new Semaphore(1);
-	
-	public void insertar(int dato) throws InterruptedException {		
-		nHuecos.acquire();		
+	public void insertar(int dato) {
+		try {
+			lock1.lock();
+			
+			while(posDisponibles == 0) {
+				try {
+					cd_1.await();
+				} catch (InterruptedException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
+			}
+			
+		} finally{
+			
+		}
 		
-		emPosInser.acquire();
-		datos[posInser] = dato;
-		posInser = (posInser+1) % datos.length;
-		emPosInser.release();
-		
-		nProductos.release();
+		array[nextINPos] = dato;
+		nextINPos = (nextINPos+1) % array.length;
 	}
-
-	public int sacar() throws InterruptedException {		
-		nProductos.acquire();
-		
-		emPosSacar.acquire();
-		int dato = datos[posSacar];
-		posSacar = (posSacar+1) % datos.length;
-		emPosSacar.release();
-		
-		nHuecos.release();	
-		
-		return dato;
+	
+	public int sacar() {
+		int returnear = array[nextOUTPos];
+		nextOUTPos = (nextOUTPos+1) % array.length;
+		return returnear;
 	}
 	
 	public void productor() {
-		
+		insertar((int)(Math.random()*50));
 	}
 	
 	public void consumidor() {
-		
+		System.out.println("Consumido: " + sacar());
 	}
 
 	public static void main(String[] args) {
