@@ -1,6 +1,6 @@
 package misEjes_Parte2;
 
-public class Eje2 {
+public class Eje2_5_3_2 {
 		
 	public void mensajes() {
 		
@@ -52,6 +52,6 @@ public class Eje2 {
 	}
 
 	public static void main(String[] args) throws InterruptedException {
-		new Eje2().exec();
+		new Eje2_5_3_2().exec();
 	}
 }

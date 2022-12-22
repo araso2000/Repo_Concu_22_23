@@ -2,7 +2,7 @@ package misEjes_Parte2;
 
 import java.util.concurrent.Semaphore;
 
-public class Eje5 {
+public class Eje5_5_5_1 {
 	
 	private static final int PRODUCTORES = 5;
 	private static final int CONSUMIDORES = 3;
@@ -82,7 +82,7 @@ public class Eje5 {
 	}
 
 	public static void main(String[] args) {
-		new Eje5().exec();
+		new Eje5_5_5_1().exec();
 	}
 
 }

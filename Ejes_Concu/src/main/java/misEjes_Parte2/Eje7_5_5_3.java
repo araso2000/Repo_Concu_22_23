@@ -4,7 +4,7 @@ import java.util.concurrent.locks.Lock;
 import java.util.concurrent.locks.ReadWriteLock;
 import java.util.concurrent.locks.ReentrantReadWriteLock;
 
-public class Eje7 {
+public class Eje7_5_5_3 {
 	
 	private final int N_LECTORES = 5;
 	private final int N_ESCRITORES = 5;
@@ -39,6 +39,6 @@ public class Eje7 {
 	}
 	
 	public static void main(String[] args) {
-		new Eje7().exec();
+		new Eje7_5_5_3().exec();
 	}
 }

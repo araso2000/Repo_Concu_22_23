@@ -4,7 +4,7 @@ import java.util.concurrent.locks.Condition;
 import java.util.concurrent.locks.Lock;
 import java.util.concurrent.locks.ReentrantLock;
 
-public class Eje9_v2 {
+public class Eje9_v2_5_5_5 {
 	
 	private static final int N_ESCRITOR = 3;
 	private static final int N_LECTOR = 5;
@@ -121,7 +121,7 @@ public class Eje9_v2 {
 	}
 
 	public static void main(String[] args) {
-		new Eje9_v2().exec();
+		new Eje9_v2_5_5_5().exec();
 	}
 
 }

@@ -4,7 +4,7 @@ import java.util.concurrent.locks.Condition;
 import java.util.concurrent.locks.Lock;
 import java.util.concurrent.locks.ReentrantLock;
 
-public class Eje8 {
+public class Eje8_5_5_4 {
 	
 	private int[] array = new int[10];
 	private int nextINPos = 0;
@@ -88,6 +88,6 @@ public class Eje8 {
 	}
 
 	public static void main(String[] args) {
-		new Eje8().exec();
+		new Eje8_5_5_4().exec();
 	}
 }

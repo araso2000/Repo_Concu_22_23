@@ -1,4 +1,4 @@
-package misEjes_Parte2.Eje10_5_6;
+package misEjes_Parte2.Eje10_5_5_6;
 
 public class Main {
 	

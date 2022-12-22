@@ -1,6 +1,6 @@
 package misEjes_Parte2;
 
-public class Eje1 {
+public class Eje1_5_3_1 {
 	
 	static volatile boolean producido = false;
 	static volatile double producto;
@@ -21,7 +21,7 @@ public class Eje1 {
 	}
 
 	public static void main(String[] args) {
-		new Eje1().exec();
+		new Eje1_5_3_1().exec();
 	}
 
 }

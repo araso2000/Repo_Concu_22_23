@@ -3,7 +3,7 @@ package misEjes_Parte2;
 import java.util.concurrent.locks.Lock;
 import java.util.concurrent.locks.ReentrantLock;
 
-public class Eje6 {
+public class Eje6_5_5_2 {
 	
 	private final int N_HILOS = 20;
 	static volatile int numero;
@@ -50,6 +50,6 @@ public class Eje6 {
 	}
 
 	public static void main(String[] args) {
-		new Eje6().exec();
+		new Eje6_5_5_2().exec();
 	}
 }

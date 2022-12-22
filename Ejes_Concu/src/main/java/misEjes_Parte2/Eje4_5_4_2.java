@@ -1,8 +1,8 @@
 package misEjes_Parte2;
 
-public class Eje4 {
+public class Eje4_5_4_2 {
 
-	private Eje3 SincCond;
+	private Eje3_5_4_1 SincCond;
 	static volatile double producto;
 	
 	public void productor() {
@@ -19,10 +19,10 @@ public class Eje4 {
 		new Thread(() -> productor()).start();
 		new Thread(() -> consumidor()).start();
 		
-		SincCond = new Eje3();
+		SincCond = new Eje3_5_4_1();
 	}
 
 	public static void main(String[] args) {
-		new Eje4().exec();
+		new Eje4_5_4_2().exec();
 	}
 }

@@ -1,4 +1,4 @@
-package misEjes_Parte2.Eje10_5_6;
+package misEjes_Parte2.Eje10_5_5_6;
 
 import java.util.concurrent.locks.Condition;
 import java.util.concurrent.locks.ReentrantLock;
