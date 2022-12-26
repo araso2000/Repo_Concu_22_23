@@ -1,5 +1,4 @@
 package practica2;
-
 /**
  * Clase que representa el resultado de haber ejecutado una tarea.
  *

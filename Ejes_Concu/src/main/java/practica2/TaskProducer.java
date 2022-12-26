@@ -1,8 +1,9 @@
 package practica2;
 
-
 import java.util.ArrayList;
+import java.util.Iterator;
 import java.util.List;
+import java.util.concurrent.ExecutionException;
 import java.util.concurrent.Future;
 
 public class TaskProducer {
@@ -17,12 +18,12 @@ public class TaskProducer {
 
     private List<Future<ComplexTaskResult>> submittedTasks = new ArrayList<>();
 
-    public TaskProducer(Universtrum unverstrumInstance, String producerId) {
-        this.universtrumInstance = unverstrumInstance;
+    public TaskProducer(Universtrum universtrumInstance, String producerId) {
+        this.universtrumInstance = universtrumInstance;
         this.producerId = producerId;
     }
 
-    public void start() {
+    public void start() throws InterruptedException {
         //TODO: Crear y arrancar un hilo que implemente el siguiente comportamiento para un Productor de tareas de Universtrum:
         // hacer N_TASKS veces.
             // Generar una ComplexTask (usar ComplexTaskRandomGenerator.generateRandomComplexTask()
@@ -32,6 +33,34 @@ public class TaskProducer {
         // este proceso, imprimiendo el resultado cuando estén finalizadas.
         // Cuando estén todas las tareas acabadas, el productor terminará diciendo que se ha completado todas sus tareas
 
+    	new Thread(() -> {
+    		while(!universtrumInstance.getStatus().equals(Universtrum.Status.RUNNING)) {}
+    		for(int ii = 0; ii < N_TASKS; ii++) {
+    			ComplexTask tarea = ComplexTaskRandomGenerator.generateRandomComplexTask(producerId,Integer.toString(((int)(Math.random()*5000))));
+    	    	System.out.println("Se envia la siguiente tarea para ser ejecutada: " + tarea.toString());
+    	    	
+    	    	Future<ComplexTaskResult> tarea1 = universtrumInstance.submit(tarea);
+    	    	if(tarea1 != null) {
+    	    		submittedTasks.add(tarea1);
+    	    	}
+    	    	
+    	    	sleepRandom(500);
+    		}
+    		
+    		for(Future<ComplexTaskResult> task : submittedTasks) {
+    			try {
+					task.get().toString();
+					
+				} catch (InterruptedException e) {
+					e.printStackTrace();
+				} catch (ExecutionException e) {
+					e.printStackTrace();
+				}
+    		}
+    		
+    		System.out.println("Tareas terminadas");
+    		
+    	}, "productor").start();
     }
 
 
