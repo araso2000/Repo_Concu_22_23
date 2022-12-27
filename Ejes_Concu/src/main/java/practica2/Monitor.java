@@ -51,24 +51,26 @@ public class Monitor {
     }
     
     public void stopMonitorFromMain() {
-    	shutdownMonitorThread = new Thread(() -> {
+    	shutdownMonitorThread = new Thread(() -> {    		
     		
-    		System.out.println("Al menos entro aqui SUPONGO YO");
-    		
-        	while(universtrumInstance.getIfShutdownMonitor()) {
-        		System.out.println("SIGO VIVO GENTE");
+        	while(universtrumInstance.getIfShutdown()) {
     			try {
-    				System.out.println(Thread.currentThread().getName() + "_Me duermo");
     				Thread.sleep(100);
     			} catch (InterruptedException e) {
     				Thread.currentThread().interrupt();
                     break;
     			}
-    			
     		}
         	System.out.println("Apagando monitor...");
-    		this.encendido = false;
+        	
+        	synchronized(new Object()){
+        		this.encendido = false;
+        	}
+    		
+    		shutdownMonitorThread.interrupt();
     		
     	},"shutdownMonitorThread");
+    	
+    	shutdownMonitorThread.start();
     }
 }

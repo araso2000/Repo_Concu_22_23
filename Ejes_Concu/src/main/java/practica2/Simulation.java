@@ -28,12 +28,14 @@ public class Simulation {
         //Thread.sleep(3000);
         universtrum.start();
         
-        sleep(UNIVERSTRUM_EXECUTION_TIME_MS);
-        universtrum.shutdown(true);
-        System.out.println("\nShutdown signal sent to Universtrum instance\n");
+        if(universtrum.getIfShutdown()) {
+        	sleep(UNIVERSTRUM_EXECUTION_TIME_MS);
+        	System.out.println("\nShutdown signal sent to Universtrum instance\n");
+            universtrum.shutdown(true);
 
-        sleep(UNIVERSTRUM_SHUTDOWN_MONITOR_TIME);
-        monitor.stopMonitor();
+            //sleep(UNIVERSTRUM_SHUTDOWN_MONITOR_TIME);
+            //monitor.stopMonitor();
+        }
     }
 
     private static void sleep(long millis) {

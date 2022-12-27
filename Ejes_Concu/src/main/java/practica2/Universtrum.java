@@ -18,7 +18,7 @@ public class Universtrum {
 
     private int concurrencyLevel = 0;
     private volatile Status status;
-    private boolean monitorStatus = true;
+    private boolean encendido = true;
         
     //TODO 01: Crear un un sistema de los hilos que ejecutarán las tareas
     ExecutorService executorService;
@@ -143,7 +143,7 @@ public class Universtrum {
     	}
     	
     	this.status=Status.SHUTTING_DOWN;
-    	System.out.println("\nRecibida orden de apagado por finalización de tareas.");
+    	System.out.println("\nRecibida orden de apagado.");
     	System.out.println("Ya no se aceptan nuevas tareas.");
     	System.out.println("Esperando a la finalización de las tareas en ejecución... Pendientes: " + pendingTasks.size() + "\n");
     	executorService.shutdown();
@@ -156,17 +156,16 @@ public class Universtrum {
 			}
     	}
     	
-    	this.monitorStatus = false;
+    	this.encendido = false;
     	this.status=Status.STOPPED;
-    	System.out.println("APAGADO");
-    	
+    	System.out.println("\nAPAGADO");
 
         //¿Cómo comprobar de forma asíncrona que se acaban todas las tareas para despúes, pasar el estado a STOPPED?
 
         //throw new UnsupportedOperationException("Not implemented yet");
     }
     
-    public boolean getIfShutdownMonitor() {
-    	return this.monitorStatus;
+    public boolean getIfShutdown() {
+    	return this.encendido;
     }
 }
