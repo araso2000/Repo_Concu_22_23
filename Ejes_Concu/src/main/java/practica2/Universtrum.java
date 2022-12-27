@@ -18,10 +18,13 @@ public class Universtrum {
 
     private int concurrencyLevel = 0;
     private volatile Status status;
-    
+    private boolean monitorStatus = true;
+        
     //TODO 01: Crear un un sistema de los hilos que ejecutarán las tareas
     ExecutorService executorService;
     CompletionService<ComplexTaskResult> completionService;
+    
+    Thread shutdownThread;
     
     //TODO 03: Implementar el mecanismo de ejecución de ComplexTask que deberán ejecutar los hilos
     //      Problema: ComplexTask devuelve un int en su metodo solve(),
@@ -58,13 +61,10 @@ public class Universtrum {
     public Universtrum(int concurrencyLevel) {
         this.concurrencyLevel = concurrencyLevel;
         status = Status.READY;
-        
-        executorService = Executors.newFixedThreadPool(this.concurrencyLevel); //Justificar en la memoria.
-        completionService = new ExecutorCompletionService<>(executorService);
     }
     
     //TODO 02-04:      y una estructura de datos que mantenga las tareas encoladas
-    //private Collection<ComplexTask> pendingTasks = new ArrayList<>();
+    
     private Collection<ComplexTask> pendingTasks = new ConcurrentLinkedQueue<>();
 
     //TODO 02 Definir un método que permita añadir una ComplexTask al supercomputador.
@@ -73,16 +73,14 @@ public class Universtrum {
     //      Si la instancia de Universtrum está parada o está parando, la invocación al método rechazará
     //      la tarea suministrada o, de forma alternativa, hará que la ejecute de forma inmediata el hilo que invoca a
     //      este método.
-    //public ??? submit(ComplexTask task)  {}
-    
+   
     public Future<ComplexTaskResult> submit(ComplexTask task) {
-        //Comprobar el STTUS de la instancia... Solo admitimos tareas en modo RUNNING
-
-    	if(status.equals(Status.RUNNING)) {
+        if(status.equals(Status.RUNNING)) {
     		Future<ComplexTaskResult> submitted = completionService.submit(new ComplexTaskResolver(task));
             pendingTasks.add(task);
             
             return submitted;
+            
     	}else {
     		return null;
     	} 
@@ -110,11 +108,15 @@ public class Universtrum {
      * más antigua de todas las que tienen la misma prioridad.
      */
     public void start() {
-        executorService = Executors.newSingleThreadExecutor();
+        executorService = Executors.newFixedThreadPool(this.concurrencyLevel); //Justificar en la memoria.
+        completionService = new ExecutorCompletionService<>(executorService);
+        
+        shutdownThread = new Thread(() -> shutdown(false),"shutdown_thread");
+        
         this.status=Status.RUNNING;
 
         //throw new UnsupportedOperationException("Not implemented yet");
-    };
+    }
 
     /**
      * Al invocar este método, la instancia de universtrum no aceptará más tareas, pero ejecutará todas las que ya hayan
@@ -129,25 +131,42 @@ public class Universtrum {
      *
      */
     public void shutdown(boolean endTasks) {
-    	if(endTasks) {
-    		System.out.println("Recibida orden de apagado por finalización de tareas. Apagando...");
-    	}else {
-    		System.out.println("Apagado de emergencia o apagado por caducidad de tiempo. Apagando...");
+    	// Marcar la instancia como SHUTTING_DOWN
+        // ¿Hay que actualizar el sistema de hilos para que notificar que estamos en proceso de apagado?
+        
+    	while(!endTasks) {
+    		try {
+				Thread.sleep(1000);
+			} catch (InterruptedException e) {
+				e.printStackTrace();
+			}
     	}
     	
-        // Marcar la instancia como SHUTTING_DOWN
-        // ¿Hay que actualizar el sistema de hilos para que notificar que estamos en proceso de apagado?
-        /*executorService.shutdown();
+    	this.status=Status.SHUTTING_DOWN;
+    	System.out.println("\nRecibida orden de apagado por finalización de tareas.");
+    	System.out.println("Ya no se aceptan nuevas tareas.");
+    	System.out.println("Esperando a la finalización de las tareas en ejecución... Pendientes: " + pendingTasks.size() + "\n");
+    	executorService.shutdown();
+    	
+    	while(!executorService.isTerminated()) {
+    		try {
+				Thread.sleep(1000);
+			} catch (InterruptedException e) {
+				e.printStackTrace();
+			}
+    	}
+    	
+    	this.monitorStatus = false;
+    	this.status=Status.STOPPED;
+    	System.out.println("APAGADO");
+    	
 
-        Thread apagado = new Thread(() -> {
-            while(!executorService.isTerminated()) {
-                //sleep
-                instance == STOPPED
-            }
-        }, "shutdown_thread");
+        //¿Cómo comprobar de forma asíncrona que se acaban todas las tareas para despúes, pasar el estado a STOPPED?
 
-        // ¿Cómo comprobar de forma asíncrona que se acaban todas las tareas para despúes, pasar el estado a STOPPED?
-
-        */throw new UnsupportedOperationException("Not implemented yet");
+        //throw new UnsupportedOperationException("Not implemented yet");
+    }
+    
+    public boolean getIfShutdownMonitor() {
+    	return this.monitorStatus;
     }
 }

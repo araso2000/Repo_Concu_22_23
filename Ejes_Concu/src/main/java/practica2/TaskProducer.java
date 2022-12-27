@@ -35,11 +35,11 @@ public class TaskProducer {
 
     	new Thread(() -> {
     		while(!universtrumInstance.getStatus().equals(Universtrum.Status.RUNNING)) {
-    			System.out.println("TaskProducer: No se pueden mandar tareas debido a: Estado inválido de Universtrum: " + universtrumInstance.getStatus());
+    			System.out.println("\nTaskProducer: No se pueden mandar tareas debido a: Estado inválido de Universtrum: " + universtrumInstance.getStatus() + "\n");
     			sleep(500);
     		}
-    		for(int ii = 0; ii < N_TASKS; ii++) {
-    			ComplexTask tarea = ComplexTaskRandomGenerator.generateRandomComplexTask(producerId,Integer.toString(((int)(Math.random()*5000))));
+    		for(int ii = 0; ii < N_TASKS && universtrumInstance.getStatus().equals(Universtrum.Status.RUNNING) ; ii++) {
+    			ComplexTask tarea = ComplexTaskRandomGenerator.generateRandomComplexTask(producerId,Integer.toString(ii));
     	    	System.out.println("Se envia la siguiente tarea para ser ejecutada: " + tarea.toString());
     	    	
     	    	Future<ComplexTaskResult> tarea1 = universtrumInstance.submit(tarea);
@@ -50,7 +50,7 @@ public class TaskProducer {
     	    	sleepRandom(500);
     		}
     		
-    		for(int ii = 0 ; ii < N_TASKS ; ii++) {
+    		for(int ii = 0 ; ii < N_TASKS && !universtrumInstance.getStatus().equals(Universtrum.Status.STOPPED) ; ii++) {
     			try { 
 					System.out.println(universtrumInstance.getCompletionService().take().get().toString());
 					
@@ -61,8 +61,10 @@ public class TaskProducer {
 				}
     		}
     		
-    		System.out.println("Tareas terminadas. Enviando señal de apagado...");
-    		universtrumInstance.shutdown(false);
+    		if(universtrumInstance.getStatus().equals(Universtrum.Status.RUNNING)) {
+    			System.out.println("\nTareas terminadas. Enviando señal de apagado...\n");
+        		universtrumInstance.shutdown(true);
+    		}
     		
     	}, "productor").start();
     }

@@ -9,17 +9,21 @@ public class Monitor {
     private final long intervalInMillis;
     
     private Thread monitorThread;
+    private Thread shutdownMonitorThread;
+    
+    private boolean encendido;
 
     public Monitor(Universtrum instance, long intervalInMillis) {
         this.universtrumInstance = instance;
         this.intervalInMillis = intervalInMillis;
+        this.encendido = true;
     }
 
     public void startMonitor() {
         monitorThread = new Thread(() -> {
-            while (true) {
-                System.out.println("Universtrum status : " + universtrumInstance.getStatus()
-                        + " with " + universtrumInstance.getPendingTasks().size());
+            while (this.encendido) {
+                System.out.println("\nUniverstrum status : " + universtrumInstance.getStatus()
+                        + " with " + universtrumInstance.getPendingTasks().size() + "\n");
                 try {
                     Thread.sleep(intervalInMillis);
                 } catch (InterruptedException e) {
@@ -41,7 +45,30 @@ public class Monitor {
     }
 
     public void stopMonitor() {
+    	this.encendido = false;
+    	shutdownMonitorThread.interrupt();
         // TODO Deberá parar el hilo de impresión del estado de la instancia de Universtrum.
-    	monitorThread.interrupt();
+    }
+    
+    public void stopMonitorFromMain() {
+    	shutdownMonitorThread = new Thread(() -> {
+    		
+    		System.out.println("Al menos entro aqui SUPONGO YO");
+    		
+        	while(universtrumInstance.getIfShutdownMonitor()) {
+        		System.out.println("SIGO VIVO GENTE");
+    			try {
+    				System.out.println(Thread.currentThread().getName() + "_Me duermo");
+    				Thread.sleep(100);
+    			} catch (InterruptedException e) {
+    				Thread.currentThread().interrupt();
+                    break;
+    			}
+    			
+    		}
+        	System.out.println("Apagando monitor...");
+    		this.encendido = false;
+    		
+    	},"shutdownMonitorThread");
     }
 }
