@@ -1,4 +1,5 @@
 package practica2;
+
 /**
  * Clase que implementa el soporte para monitorizar el estado de una instancia de Unvierstrum
  */
@@ -6,7 +7,7 @@ public class Monitor {
 
     private final Universtrum universtrumInstance;
     private final long intervalInMillis;
-
+    
     private Thread monitorThread;
 
     public Monitor(Universtrum instance, long intervalInMillis) {

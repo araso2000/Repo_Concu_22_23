@@ -14,13 +14,15 @@ public class Universtrum {
 
     public static enum Status {
         READY, RUNNING, SHUTTING_DOWN, STOPPED;
-
     }
 
     private int concurrencyLevel = 0;
     private volatile Status status;
-
-
+    
+    //TODO 01: Crear un un sistema de los hilos que ejecutarán las tareas
+    ExecutorService executorService;
+    CompletionService<ComplexTaskResult> completionService;
+    
     //TODO 03: Implementar el mecanismo de ejecución de ComplexTask que deberán ejecutar los hilos
     //      Problema: ComplexTask devuelve un int en su metodo solve(),
     //                Pero Univestrum recibe ComplexTask y debe devolver ComplexTaskResult...
@@ -30,6 +32,7 @@ public class Universtrum {
     // Hint: ComplexTaskResolver implements Callable<ComplexTaskResult>
     // ¿Qué referencias externas necesitamos al crear la tarea?
     // ¿Cómo vamos a gestionar el control del tiempo que lleva la tarea ejecutándose y esperando a ser ejecutada?
+    
     class ComplexTaskResolver implements Callable<ComplexTaskResult> {
 
         private final ComplexTask task;
@@ -47,20 +50,20 @@ public class Universtrum {
             int resultValue = task.solve();
             Duration executionTime = Duration.between(start, LocalDateTime.now());
             Duration waitingTime = Duration.between(received, start);
+            pendingTasks.remove(task);
             return new ComplexTaskResult(task.getTaskId(), resultValue, executionTime.toMillis(), waitingTime.toMillis());
         }
     }
-
+    
     public Universtrum(int concurrencyLevel) {
         this.concurrencyLevel = concurrencyLevel;
         status = Status.READY;
+        
+        executorService = Executors.newFixedThreadPool(this.concurrencyLevel); //Justificar en la memoria.
+        completionService = new ExecutorCompletionService<>(executorService);
     }
-
-    // TODO 01: Crear un un sistema de los hilos que ejecutarán las tareas
-    //Thread[] treads;
-    ExecutorService executorService;// = Executors.newFixedThreadPool(concurrencyLevel); //Justificar en la memoria.
-   
-    // TODO 02-04:      y una estructura de datos que mantenga las tareas encoladas
+    
+    //TODO 02-04:      y una estructura de datos que mantenga las tareas encoladas
     //private Collection<ComplexTask> pendingTasks = new ArrayList<>();
     private Collection<ComplexTask> pendingTasks = new ConcurrentLinkedQueue<>();
 
@@ -71,11 +74,12 @@ public class Universtrum {
     //      la tarea suministrada o, de forma alternativa, hará que la ejecute de forma inmediata el hilo que invoca a
     //      este método.
     //public ??? submit(ComplexTask task)  {}
+    
     public Future<ComplexTaskResult> submit(ComplexTask task) {
         //Comprobar el STTUS de la instancia... Solo admitimos tareas en modo RUNNING
 
     	if(status.equals(Status.RUNNING)) {
-    		Future<ComplexTaskResult> submitted = executorService.submit(new ComplexTaskResolver(task));
+    		Future<ComplexTaskResult> submitted = completionService.submit(new ComplexTaskResolver(task));
             pendingTasks.add(task);
             
             return submitted;
@@ -86,6 +90,10 @@ public class Universtrum {
 
     public Status getStatus() {
         return status;
+    }
+    
+    public CompletionService<ComplexTaskResult> getCompletionService(){
+    	return this.completionService;
     }
 
     public Collection<ComplexTask> getPendingTasks() {
@@ -120,7 +128,13 @@ public class Universtrum {
      * las tareas, el estado de Universum pasará a STOPPED.
      *
      */
-    public void shutdown() {
+    public void shutdown(boolean endTasks) {
+    	if(endTasks) {
+    		System.out.println("Recibida orden de apagado por finalización de tareas. Apagando...");
+    	}else {
+    		System.out.println("Apagado de emergencia o apagado por caducidad de tiempo. Apagando...");
+    	}
+    	
         // Marcar la instancia como SHUTTING_DOWN
         // ¿Hay que actualizar el sistema de hilos para que notificar que estamos en proceso de apagado?
         /*executorService.shutdown();

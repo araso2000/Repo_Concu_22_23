@@ -19,7 +19,15 @@ public class ComplexTask {
         return taskId;
     }
 
-    public int solve() {
+    public int getExpectedSolution() {
+		return expectedSolution;
+	}
+
+	public long getComputationCostInMillis() {
+		return computationCostInMillis;
+	}
+
+	public int solve() {
         //TODO: Para simular la resolución de la tarea, el hilo que ejecute este método deberá devolver
         //      el valor de expectedSolution después de que pasaen costInMillis milisegundos.
         // Se puede utilizar la función sleep
