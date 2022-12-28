@@ -1,7 +1,6 @@
 package practica2;
 
 import java.util.ArrayList;
-import java.util.Iterator;
 import java.util.List;
 import java.util.concurrent.ExecutionException;
 import java.util.concurrent.Future;
@@ -14,8 +13,6 @@ public class TaskProducer {
     private final Universtrum universtrumInstance;
     private final String producerId;
 
-    private Thread producerThread;
-
     private List<Future<ComplexTaskResult>> submittedTasks = new ArrayList<>();
 
     public TaskProducer(Universtrum universtrumInstance, String producerId) {
@@ -23,17 +20,9 @@ public class TaskProducer {
         this.producerId = producerId;
     }
 
+    //DONE
     public void start() throws InterruptedException {
-        //TODO: Crear y arrancar un hilo que implemente el siguiente comportamiento para un Productor de tareas de Universtrum:
-        // hacer N_TASKS veces.
-            // Generar una ComplexTask (usar ComplexTaskRandomGenerator.generateRandomComplexTask()
-            // Enviar la tarea a la instancia de Universtrum. (debe imprimir un mensaje indicando la tarea que se envia).
-            // el hilo se bloqueará un tiempo aleatorio entre 100 y 500 milisegundos. (se puede utilizar el método sleepRandom).
-        // Al acabar de enviar las tareas, se quedará a la espera de que se resuelvan las tareas enviadas por
-        // este proceso, imprimiendo el resultado cuando estén finalizadas.
-        // Cuando estén todas las tareas acabadas, el productor terminará diciendo que se ha completado todas sus tareas
-
-    	new Thread(() -> {
+        new Thread(() -> {
     		while(!universtrumInstance.getStatus().equals(Universtrum.Status.RUNNING)) {
     			System.out.println("\nTaskProducer: No se pueden mandar tareas debido a: Estado inválido de Universtrum: " + universtrumInstance.getStatus() + "\n");
     			sleep(500);
@@ -46,29 +35,34 @@ public class TaskProducer {
     	    	if(tarea1 != null) {
     	    		submittedTasks.add(tarea1);
     	    	}
-    	    	
+    	    	    	    	
     	    	sleepRandom(500);
     		}
     		
-    		for(int ii = 0 ; ii < N_TASKS && !universtrumInstance.getStatus().equals(Universtrum.Status.STOPPED) ; ii++) {
-    			try { 
-					System.out.println(universtrumInstance.getCompletionService().take().get().toString());
-					
-				} catch (InterruptedException e) {
-					e.printStackTrace();
-				} catch (ExecutionException e) {
-					e.printStackTrace();
-				}
-    		}
+    		checkFinishedTask();
     		
     		if(universtrumInstance.getStatus().equals(Universtrum.Status.RUNNING)) {
     			System.out.println("\nTareas terminadas. Enviando señal de apagado...\n");
         		universtrumInstance.shutdown(true);
     		}
     		
-    	}, "productor").start();
+    	}, "productor_" + this.producerId).start();
     }
 
+    //DONE
+    public void checkFinishedTask() {
+    	for(int ii = 0 ; ii < N_TASKS && !universtrumInstance.getStatus().equals(Universtrum.Status.STOPPED) ; ii++) {
+			try { 
+				
+				System.out.println(universtrumInstance.getCompletionService().take().get().toString());
+				
+			} catch (InterruptedException e) {
+				e.printStackTrace();
+			} catch (ExecutionException e) {
+				e.printStackTrace();
+			}
+		}
+    }
 
     public static void sleepRandom(long millis) {
         sleep((long) (Math.random() * millis));

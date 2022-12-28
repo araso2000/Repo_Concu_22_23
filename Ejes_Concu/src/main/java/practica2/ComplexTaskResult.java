@@ -30,6 +30,10 @@ public class ComplexTaskResult {
     public long getExecutionTime() {
         return executionTime;
     }
+    
+    public String getId() {
+    	return this.taskId;
+    }
 
     @Override
     public String toString() {

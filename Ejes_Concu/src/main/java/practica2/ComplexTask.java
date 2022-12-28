@@ -27,15 +27,10 @@ public class ComplexTask {
 		return computationCostInMillis;
 	}
 
+	//DONE
 	public int solve() {
-        //TODO: Para simular la resolución de la tarea, el hilo que ejecute este método deberá devolver
-        //      el valor de expectedSolution después de que pasaen costInMillis milisegundos.
-        // Se puede utilizar la función sleep
-    	
-    	sleep(computationCostInMillis);
+        sleep(computationCostInMillis);
     	return expectedSolution;
-       
-    	//throw new UnsupportedOperationException("Not implemented yet");
     }
 
     private static void sleep(long millis) {
