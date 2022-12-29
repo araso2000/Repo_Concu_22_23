@@ -18,7 +18,6 @@ public class Universtrum {
 
     private int concurrencyLevel = 0;
     private volatile Status status;
-    private boolean encendido = true;
         
     //DONE
     ExecutorService executorService;
@@ -81,7 +80,7 @@ public class Universtrum {
     }
 
     public void start() {
-        executorService = Executors.newFixedThreadPool(this.concurrencyLevel); //Justificar en la memoria.
+        executorService = Executors.newFixedThreadPool(this.concurrencyLevel);
         completionService = new ExecutorCompletionService<>(executorService);
         
         shutdownThread = new Thread(() -> shutdown(false),"shutdown_thread");
@@ -113,12 +112,7 @@ public class Universtrum {
 			}
     	}
     	
-    	this.encendido = false;
     	this.status=Status.STOPPED;
     	System.out.println("\nAPAGADO");
-    }
-    
-    public boolean getIfShutdown() {
-    	return this.encendido;
     }
 }
