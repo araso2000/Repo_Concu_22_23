@@ -1,4 +1,4 @@
-package misEjes_Parte2.Eje10_5_5_6;
+package estudiar_Parte2.Tema5_5_Eje_6;
 
 import java.util.concurrent.locks.Condition;
 import java.util.concurrent.locks.ReentrantLock;
@@ -66,7 +66,7 @@ public class DataSourceManager {
 		try {
 			System.out.println("DataManager -> Intentando accessAnyDataSource" + name);
 			
-			while(n_accedidos == 10) {
+			while(n_accedidos == N_DATA) {
 				cdNormal.await();
 			}
 			

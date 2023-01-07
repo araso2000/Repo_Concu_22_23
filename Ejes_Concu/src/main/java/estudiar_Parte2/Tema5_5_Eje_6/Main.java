@@ -1,4 +1,4 @@
-package misEjes_Parte2.Eje10_5_5_6;
+package estudiar_Parte2.Tema5_5_Eje_6;
 
 public class Main {
 	
