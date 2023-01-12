@@ -8,7 +8,7 @@ public class Aena {
 	public static void main(String[] args) {
 
 		Map<String, Aeropuerto> aeropuertos = new HashMap<>();
-		
+				
 		addAeropuerto(aeropuertos, new Aeropuerto("Barajas", "Madrid", 10, 4));
 		addAeropuerto(aeropuertos, new Aeropuerto("Prat", "Barcelona", 6, 5));
 		addAeropuerto(aeropuertos, new Aeropuerto("Aeropuerto de Castellón", "Castellón", 0, 4));

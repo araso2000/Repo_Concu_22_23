@@ -19,6 +19,7 @@ public class Eje5 {
 		} catch (InterruptedException e) {
 			e.printStackTrace();
 		}
+		
 		return tipo;
 	}
 	
