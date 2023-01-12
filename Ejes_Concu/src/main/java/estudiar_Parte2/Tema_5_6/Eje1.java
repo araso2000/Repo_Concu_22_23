@@ -12,7 +12,7 @@ public class Eje1 {
 		nombres.add("Pepe");
 		nombres.add("Juan");
 		nombres.add("Antonio");
-
+		
 		System.out.println(nombres);
 		System.out.println("Tamaño: " + nombres.size());
 
